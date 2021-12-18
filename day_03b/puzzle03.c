@@ -11,7 +11,7 @@ size_t n_data = 0;
 #define SEARCH_OXYGEN 1
 #define SEARCH_CARBON 0
 
-int search_oxygen(int* data, int search_type){
+int search(int* data, int search_type){
    int data_active[DATA_MAX];
    for (size_t i=0; i<n_data; ++i){
       data_active[i] = 1;
@@ -32,25 +32,26 @@ int search_oxygen(int* data, int search_type){
          }
       }
 
-      // which is most common? 
-      if (ones >= zeros){
-         // throw out options that have zero in that position
-         for (size_t i=0; i<n_data; ++i){
-            if (data_active[i] == 1){
-              int val = (data[i] & (0x1 << bit)) > 0; // look for 1
-              data_active[i] = val; 
-            }
+      int value_to_keep = 0;
+      if (search_type == SEARCH_OXYGEN){
+         if (ones >= zeros){
+            value_to_keep = 1;
          }
       }
-      else{
-         // throw out options that have one in that position
-         for (size_t i=0; i<n_data; ++i){
-            if (data_active[i] == 1){
-               int val = (data[i] & (0x1 << bit)) > 0; // look for 1
-               data_active[i] = 1-val;
-            }
+      else if (search_type == SEARCH_CARBON){
+         if (ones < zeros){
+            value_to_keep = 1;
          }
       }
+
+      // throw out stuff that doesn't have value to keep!
+      for (size_t i=0; i<n_data; ++i){
+         if (data_active[i] == 1){
+           int val = (data[i] & (0x1 << bit)) > 0; // look for 1
+           data_active[i] = (val == value_to_keep); 
+         }
+      }
+      
 
       // how many options are left?
       int remaining = 0;
@@ -127,8 +128,11 @@ int main(int argc, char *argv[]){
 
    fclose(fd);
 
-   oxygen_rating = search_oxygen(data);
-   printf("oxygen_rating=%d\n", oxygen_rating);
+   oxygen_rating = search(data, SEARCH_OXYGEN);
+   // printf("oxygen_rating=%d\n", oxygen_rating);
+
+   carbon_rating = search(data, SEARCH_CARBON);
+   // printf("carbon_rating=%d\n", carbon_rating);
 
    printf("%d\n", oxygen_rating*carbon_rating);
 
