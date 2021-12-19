@@ -1,0 +1,63 @@
+detected map size: 5 x 10
+ 2  1  9  9  9  4  3  2  1  0 
+ 3  9  8  7  8  9  4  9  2  1 
+ 9  8  5  6  7  8  9  8  9  2 
+ 8  7  6  7  8  9  6  7  8  9 
+ 9  8  9  9  9  6  5  6  7  8 
+new basin candidate
+ 2  2  0  0  0  0  0  0  0  0 
+ 2  0  0  0  0  0  0  0  0  0 
+ 0  0  0  0  0  0  0  0  0  0 
+ 0  0  0  0  0  0  0  0  0  0 
+ 0  0  0  0  0  0  0  0  0  0 
+  candidate basin size: 3
+NEW TOP 3 BASINS!!!
+TOP 3 basins after some labeling
+16 16  0  0  0  0  0  0  0  0 
+16  0  0  0  0  0  0  0  0  0 
+ 0  0  0  0  0  0  0  0  0  0 
+ 0  0  0  0  0  0  0  0  0  0 
+ 0  0  0  0  0  0  0  0  0  0 
+new basin candidate
+ 0  0  0  0  0  2  2  2  2  2 
+ 0  0  0  0  0  0  2  0  2  2 
+ 0  0  0  0  0  0  0  0  0  2 
+ 0  0  0  0  0  0  0  0  0  0 
+ 0  0  0  0  0  0  0  0  0  0 
+  candidate basin size: 9
+NEW TOP 3 BASINS!!!
+TOP 3 basins after some labeling
+ 8  8  0  0  0 16 16 16 16 16 
+ 8  0  0  0  0  0 16  0 16 16 
+ 0  0  0  0  0  0  0  0  0 16 
+ 0  0  0  0  0  0  0  0  0  0 
+ 0  0  0  0  0  0  0  0  0  0 
+new basin candidate
+ 0  0  0  0  0  0  0  0  0  0 
+ 0  0  2  2  2  0  0  0  0  0 
+ 0  2  2  2  2  2  0  0  0  0 
+ 2  2  2  2  2  0  0  0  0  0 
+ 0  2  0  0  0  0  0  0  0  0 
+  candidate basin size: 14
+NEW TOP 3 BASINS!!!
+TOP 3 basins after some labeling
+ 4  4  0  0  0  8  8  8  8  8 
+ 4  0 16 16 16  0  8  0  8  8 
+ 0 16 16 16 16 16  0  0  0  8 
+16 16 16 16 16  0  0  0  0  0 
+ 0 16  0  0  0  0  0  0  0  0 
+new basin candidate
+ 0  0  0  0  0  0  0  0  0  0 
+ 0  0  0  0  0  0  0  0  0  0 
+ 0  0  0  0  0  0  0  2  0  0 
+ 0  0  0  0  0  0  2  2  2  0 
+ 0  0  0  0  0  2  2  2  2  2 
+  candidate basin size: 9
+NEW TOP 3 BASINS!!!
+TOP 3 basins after some labeling
+ 0  0  0  0  0  4  4  4  4  4 
+ 0  0 16 16 16  0  4  0  4  4 
+ 0 16 16 16 16 16  0  8  0  4 
+16 16 16 16 16  0  8  8  8  0 
+ 0 16  0  0  0  8  8  8  8  8 
+1134
