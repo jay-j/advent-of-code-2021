@@ -15,87 +15,6 @@ void print_crabs(int* list){
    printf("\n");
 }
 
-size_t quicksort_partition(int* list, size_t start, size_t end){
-   // pivot value, from the middle of the array
-   int pivot_index = (int) floor((start + end)/2 );
-   int pivot = list[pivot_index ];
-
-   // left index
-   size_t i = start - 1;
-
-   // right index
-   size_t j = end + 1;
-
-   for(;;){
-      // move the left index to the right (at least once) 
-      // and while element at the left is less than the pivot
-      do {
-         ++i;
-      } while(list[i] < pivot);
-
-      // move the right index to the left at least once 
-      // and while element at the right index is greater than the pivot
-      do {
-         --j;
-      } while (list[j] > pivot);
-
-      // if indices crossed, give up!
-      if (i >= j){
-         return j;
-      }
-
-      // swap
-      int tmp = list[i];
-      list[i] = list[j];
-      list[j] = tmp;
-   }
-
-}
-
-// thanks to wikipedia ! Hoare partition
-void quicksort(int* list, size_t start, size_t end){
-   if ((start >= 0) & (end >= 0) & (start < end)){
-
-      // partition and get pivot index
-      size_t pivot_loc = quicksort_partition(list, start, end);
-
-      // recursive break into subproblems
-      quicksort(list, start, pivot_loc);
-      quicksort(list, pivot_loc+1, end);
-   }
-  
-   return;
-}
-
-
-int median(int* list){
-   printf("the UNsorted list!\n");
-   print_crabs(list);
-
-   // sort list
-   quicksort(list, 0, n_crabs-1);
-
-   printf("the sorted list!\n");
-   print_crabs(list);
-
-   // seek the middle
-   int result = 0;
-
-   // n_crabs=10.. indexes 0 thru 9.. 
-   if (n_crabs % 2 == 0){
-      // even list, have to split the difference to get median
-      result += list[n_crabs/2];
-      result += list[n_crabs/2 - 1];
-      result /= 2;
-   }
-   else{
-      // odd numbered list, can just pick the middle-est one
-      result = list[ (int) floor(n_crabs/2) ];
-   }
-
-   return result;
-}
-
 
 int mean(int* list){
    int sum = 0;
@@ -103,13 +22,15 @@ int mean(int* list){
       sum += list[i];
    }
    printf("mean=%g\n", (double)sum / (double) n_crabs);
-   sum = (int) floor((double)sum / (double) n_crabs);
+   sum = (int) round((double)sum / (double) n_crabs);
    return sum;
 }
+
 
 inline int fast_abs(int x){
    return x*(-1 + 2*(x >= 0));
 }
+
 
 int fuel(int* list, int target){
    int sum = 0;
@@ -123,6 +44,7 @@ int fuel(int* list, int target){
    }
    return sum;
 }
+
 
 int main(int argc, char *argv[]){
 
@@ -161,11 +83,24 @@ int main(int argc, char *argv[]){
 
    printf("n_crabs=%d\n", n_crabs);
 
-   int goal = mean(crab_positions);
+   int best_goal = -1;
+   int best_fuel = INT32_MAX;
 
-   printf("goal=%d\n", goal);
+   for (int i=-1; i<2; ++i){
+      int goal_i = mean(crab_positions) + i;
+      int fuel_i = fuel(crab_positions, goal_i);
 
-   printf("%d\n", fuel(crab_positions, goal));
+      if (fuel_i < best_fuel){
+         best_fuel = fuel_i;
+         best_goal = goal_i;
+      }
+
+   }
+
+   printf("goal=%d\n", best_goal);
+   printf("%d\n", best_fuel );
 
    return 0;
 }
+
+// 93397632
