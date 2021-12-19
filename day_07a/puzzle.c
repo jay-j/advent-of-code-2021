@@ -52,7 +52,7 @@ size_t quicksort_partition(int* list, size_t start, size_t end){
 
 }
 
-// thanks to wikipedia ! 
+// thanks to wikipedia ! Hoare partition
 void quicksort(int* list, size_t start, size_t end){
    if ((start >= 0) & (end >= 0) & (start < end)){
 
@@ -60,7 +60,7 @@ void quicksort(int* list, size_t start, size_t end){
       size_t pivot_loc = quicksort_partition(list, start, end);
 
       // recursive break into subproblems
-      quicksort(list, 0, pivot_loc);
+      quicksort(list, start, pivot_loc);
       quicksort(list, pivot_loc+1, end);
    }
   
@@ -96,6 +96,45 @@ int median(int* list){
    return result;
 }
 
+
+inline int fast_abs(int x){
+   return x*(-1 + 2*(x >= 0));
+}
+
+int fuel(int* list, int target){
+   int sum = 0;
+
+   for (size_t i=0; i<n_crabs; i++){
+      sum += fast_abs(list[i] - target);
+   }
+   return sum;
+}
+
+inline int floor_int(double x){
+   return (int) floor(x);
+}
+
+int solver_newton(int* list, double guess_x1){
+   double guess_y1 = (double) fuel(list, floor_int(guess_x1));
+   printf("fuel cost: %g (guess_y1)\n", guess_y1);
+
+   double guess_x2 = guess_x1 + 1;
+   double slope = (double) fuel(list, floor_int(guess_x2));
+   slope =- guess_y1;
+   printf("slope: %g\n", slope);
+
+
+   double guess_new =  guess_x1 -  (guess_y1 / slope);
+   printf("new guess: %g\n", guess_new);
+
+   if (fast_abs(floor_int(guess_x1 - guess_new)) > 1){
+      return solver_newton(list, guess_new);
+   }
+
+   return guess_new;
+}
+
+
 int mean(int* list){
    int sum = 0;
    for (size_t i=0; i<n_crabs; ++i){
@@ -106,18 +145,6 @@ int mean(int* list){
    return (int) sum;
 }
 
-int fuel(int* list, int median){
-   int sum = 0;
-
-   for (size_t i=0; i<n_crabs; i++){
-      int tmp = list[i] - median;
-      if (tmp < 0){
-         tmp *= -1;
-      }
-      sum += tmp;
-   }
-   return sum;
-}
 
 int main(int argc, char *argv[]){
 
@@ -156,8 +183,9 @@ int main(int argc, char *argv[]){
 
    printf("n_crabs=%d\n", n_crabs);
 
-   //int goal = median(crab_positions);
-   int goal = mean(crab_positions);
+   int goal = median(crab_positions);
+   //int goal = mean(crab_positions);
+   //int goal = solver_newton(crab_positions, 5);
 
    printf("%d\n", fuel(crab_positions, goal));
 
