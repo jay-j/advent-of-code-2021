@@ -1,0 +1,4 @@
+n_crabs=10
+mean=4.9
+goal=4
+170
