@@ -1,0 +1,18 @@
+incomplete line: [({(<(())[]>[[{[]{<()<>>
+
+  autocorrect score: 288957
+incomplete line: [(()[<>])]({[<{<<[]>>(
+
+  autocorrect score: 5566
+incomplete line: (((({<>}<{<{<>}{[]{[]{}
+
+  autocorrect score: 1480781
+incomplete line: {<[[]]>}<{[{[{[]{()[[[]
+
+  autocorrect score: 995444
+incomplete line: <{([{{}}[<[[[<>{}]]]>[]]
+
+  autocorrect score: 294
+294 5566 288957 995444 1480781 
+autocorrect_n = 5
+288957

@@ -1,0 +1,11 @@
+ILLEGAL } on line {([(<{}[<>[]}>{[]{[(<()>
+
+ILLEGAL ) on line [[<[([]))<([[{}[[()]]]
+
+ILLEGAL ] on line [{[{({}]{}}([{[{{{}}([]
+
+ILLEGAL ) on line [<(<(<(<{}))><([]([]()
+
+ILLEGAL > on line <{([([[(<>()){}]>(<<{{
+
+26397
