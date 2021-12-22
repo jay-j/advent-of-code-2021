@@ -1,0 +1,3 @@
+player positions:
+3 7 
+739785
