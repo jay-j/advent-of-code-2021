@@ -4,14 +4,20 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#define __STDC_FORMAT_MACROS
+#include <inttypes.h>
+
 #define PLAYERS 2
 #define POSITIONS 10
 #define SCORES 22
 #define BOARD POSITIONS*SCORES
+#define DICE_SIDES 3
+#define DICE_LIST 100
 
 typedef struct{
-   int position;
-   int score;
+   int position[PLAYERS];
+   int score[PLAYERS];
+   uint64_t qty;
 } game;
 
 int advance_position(int position, int dice){
@@ -39,25 +45,26 @@ void print_boardstate(uint64_t* board, size_t player){
    for (size_t score=0; score<SCORES; ++score){
       printf("%ld\t|", score);
       for(size_t pos=0; pos<POSITIONS; ++pos){
-         printf("%ld\t", board[BOARD*player + POSITIONS*score +pos]);
+         printf("%"PRIu64"\t", board[BOARD*player + POSITIONS*score +pos]);
       }
       printf("\n");
    }
 }
 
-int calculate_next_state(const uint64_t* boards, uint64_t* boards_working, size_t player, size_t score, size_t pos, int* dice_qty, uint64_t* wins){
-   
+int calculate_next_state(const uint64_t* boards, uint64_t* boards_working, size_t score, size_t pos, int* dice_qty, uint64_t* wins){
+
    int continue_play = 0;
    
    // multiply results here by number of games in the state being left
    uint64_t qty_src = boards[BOARD*player + POSITIONS*score + pos];
 
    // for each option in the dice list.. 
-   for( size_t d=3; d<10; ++d){
+   for( size_t d1=3; d1<10; ++d1){
+      for(size_t d2=3; d2<10; ++d2){
       // calculate what the new state would be
-      int new_pos = advance_position(pos, d);
+      int new_pos = advance_position(pos, d1);
       int new_score = advance_score(score, new_pos);
-      uint64_t new_qty = (uint64_t)dice_qty[d] * (uint64_t)qty_src;
+      uint64_t new_qty = (uint64_t)dice_qty[d1 * (uint64_t)qty_src;
 
       if (new_score >= 21){
          new_score = 21;
@@ -69,6 +76,7 @@ int calculate_next_state(const uint64_t* boards, uint64_t* boards_working, size_
 
       // add to boards_working
       boards_working[BOARD*player + POSITIONS*new_score + new_pos] += new_qty;
+      }
 
     }
 
@@ -106,22 +114,53 @@ int main(int argc, char *argv[]){
    fclose(fd);
 
    // Build list of potential dice options
-   int dice_list[11];
-   for(size_t i=0; i<11; ++i){
-      dice_list[i] = 0;
+   // sum of each dice could be one of 7 values: [3,9]
+   // so possible space of two is 7*7 or 49
+   // index.. 10*p2_val + p1_val ..... AKA these coordinates are the points to add!
+   // minimum value is 3..  but it is not too bad to use a bigger list than required
+   int dice_list_quantity[DICE_LIST];
+   for(size_t i=0; i<DICE_LIST; ++i){
+      dice_list_quantity[i] = 0;
    }
-   for (size_t i=1; i<4; ++i){
-      for(size_t j=1; j<4; ++j){
-         for(size_t k=1; k<4; ++k){
-            int tmp = i+j+k;
-            dice_list[tmp] += 1;
+   for(int a=1; a<=DICE_SIDES; ++a){
+      for(int b=1; b<=DICE_SIDES; ++b){
+         for(int c=1; c<=DICE_SIDES; ++c){
+            
+            for(int d=1; d<=DICE_SIDES; ++d){
+               for(int e=1; e<=DICE_SIDES; ++e){
+                  for(int f=1; f<=DICE_SIDES; ++f){
+
+                     int p1_dice_val = a+b+c;
+                     int p2_dice_val = d+e+f;
+                     dice_list_quantity[10*p2_dice_val + p1_dice_val] += 1;
+                  }
+               }
+            }
          }
       }
    }
+   
    printf("Dice Quantity Options:\n");
-   for(size_t i=3; i<10; ++i){
-      printf("dice_sum[%ld] = %d\n", i, dice_list[i]);
+   for(size_t i=0; i<10; ++i){
+      for(size_t j=0; j<10; ++j){
+         printf("%d\t", dice_list_quantity[10*i+j]);
+      }
+      printf("\n");
    }
+
+   // now squash the dice list.. don't actually need it to be 2D
+   int dice_list[10];
+   for(size_t i=0; i<10; ++i){
+      dice_list[i] =0;
+   }
+   for(size_t i=0; i<10; ++i){
+      for(size_t j=0; j<10; ++j){
+         dice_list[i] += dice_list_quantity[10*i+j];
+      }
+      printf("%d ", dice_list[i]);
+   }
+   printf("\n");
+   
 
    int continue_play_latched[2] = {1, 1};
    uint64_t wins[2] = {0, 0};
@@ -144,9 +183,9 @@ int main(int argc, char *argv[]){
                   }
                }
             }
-            if (player == 0){
+            //if (player == 0){
                print_boardstate(boards_working, player);
-            }
+            //}
          }
       }
 
@@ -169,8 +208,8 @@ int main(int argc, char *argv[]){
    // track number of outcomes that have each amount of points? and have each 
    // track number of outcomes in each possible game state? 
 
-   printf("Player 1 wins: %ld\n",wins[0]); 
-   printf("Player 2 wins: %ld\n",wins[1]);
+   printf("Player 1 wins: %"PRIu64"\n",wins[0]); 
+   printf("Player 2 wins: %"PRIu64"\n",wins[1]);
 
    return 0;
 }
