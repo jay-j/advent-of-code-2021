@@ -12,40 +12,55 @@
 #define DICE_LIST 100
 
 typedef struct{
-   int position[PLAYERS];
-   int score[PLAYERS];
+   size_t position[PLAYERS];
+   size_t score[PLAYERS];
    uint64_t qty;
 } game;
 
-void advance_position(game* old, game* new, size_t p, int dice){
-   new->position[p] = (old->position[p] + dice) % 10;
+
+void advance_position(game* old, game* new, size_t* dice, size_t p){
+   new->position[p] = (old->position[p] + dice[p]) % 10;
 }
+
 
 void advance_score(game* old, game* new, size_t p){
    new->score[p] = old->score[p] + (new->position[p]+1); // because position is zero-indexed
 }
 
 
+// recursively play the game, for each possible path keep track of how many possible games can take it
 void calculate_next_state(game gamestate_old, uint64_t* dice_qty, uint64_t* wins){
 
    // for each option in the dice list.. 
-   size_t d[2];
-   for( d[0]=3; d[0]<10; ++d[0]){
-      for( d[1]=3; d[1]<10; ++d[1]){
+   for(size_t d1=3; d1<10; ++d1){
+      int player1_wins_first = 0;
+
+      for(size_t d2=3; d2<10; ++d2){
+         size_t d[PLAYERS] = {d1, d2};
+
          // create a new gamestate
          game gamestate_new;
-         gamestate_new.qty = gamestate_old.qty * dice_qty[10*d[1] + d[0]];
          int continue_play = 1;
 
          for(size_t p=0; p<PLAYERS; ++p){
             // advance position
-            advance_position(&gamestate_old, &gamestate_new, p, d[p]);
+            advance_position(&gamestate_old, &gamestate_new, d, p);
 
             // score
             advance_score(&gamestate_old, &gamestate_new, p);
 
             // exit if there is a winner!
             if (gamestate_new.score[p] >= 21){
+               if (p == 0){
+                  // only look at probable quantities from 3 dice (not six like if both players get to roll)
+                  player1_wins_first = 1;
+                  int dice_tmp[10] = {0, 0, 0, 1, 3, 6, 7, 6, 3, 1};
+                  gamestate_new.qty = gamestate_old.qty * dice_tmp[d[0]];
+               }
+               else{
+                  // only one possible roll if player 2 wins
+                  gamestate_new.qty = gamestate_old.qty * dice_qty[10*d[1] + d[0]];
+               }
                wins[p] += gamestate_new.qty;
                continue_play = 0;
                break; // don't allow the other player to get a win also
@@ -53,7 +68,12 @@ void calculate_next_state(game gamestate_old, uint64_t* dice_qty, uint64_t* wins
          }
          if(continue_play == 1){
             // recursion
+            gamestate_new.qty = gamestate_old.qty * dice_qty[10*d[1] + d[0]];
             calculate_next_state(gamestate_new, dice_qty, wins);
+         }
+
+         if(player1_wins_first == 1){
+            break;
          }
 
       }
@@ -82,6 +102,7 @@ int main(int argc, char *argv[]){
    game_init.position[0] = p1pos;
    printf("P0 pos: %d (zero-indexed)\n", p1pos);
 
+   // get player 2 position
    fgets_status = fgets(line_raw, sizeof(line_raw), fd);
    assert(fgets_status != NULL);
    int p2pos = atoi(line_raw) - 1;
@@ -124,6 +145,7 @@ int main(int argc, char *argv[]){
       printf("\n");
    }
 
+   // recursively play the game
    uint64_t wins[2] = {0, 0};
    calculate_next_state(game_init, dice_list_quantity, wins);
 
