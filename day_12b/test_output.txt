@@ -1,0 +1,53 @@
+description connects start to A
+description connects start to b
+description connects A to c
+description connects A to b
+description connects b to d
+description connects A to end
+description connects b to end
+Node start  has links: 1 2 
+Node A  has links: 0 3 2 5 
+Node b  has links: 0 1 4 5 
+Node c  has links: 1 
+Node d  has links: 2 
+Node end  has links: 1 2 
+Start node is 0
+End node is 5
+start,A,c,A,c,A,b,A,end
+start,A,c,A,c,A,b,end
+start,A,c,A,c,A,b,A,end
+start,A,c,A,c,A,b,end
+start,A,c,A,c,A,end
+start,A,c,A,b,A,end
+start,A,c,A,b,end
+start,A,c,A,b,A,end
+start,A,c,A,b,end
+start,A,c,A,end
+start,A,c,A,b,A,end
+start,A,c,A,b,end
+start,A,c,A,b,A,end
+start,A,c,A,b,end
+start,A,c,A,end
+start,A,b,A,c,A,end
+start,A,b,A,c,A,end
+start,A,b,A,end
+start,A,b,end
+start,A,b,A,c,A,end
+start,A,b,A,c,A,end
+start,A,b,A,end
+start,A,b,end
+start,A,end
+start,b,A,c,A,c,A,end
+start,b,A,c,A,end
+start,b,A,c,A,end
+start,b,A,end
+start,b,d,b,A,c,A,end
+start,b,d,b,A,c,A,end
+start,b,d,b,A,end
+start,b,d,b,end
+start,b,end
+start,b,A,c,A,end
+start,b,A,c,A,end
+start,b,A,end
+start,b,end
+37

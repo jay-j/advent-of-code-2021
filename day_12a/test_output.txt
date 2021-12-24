@@ -1,0 +1,257 @@
+description connects fs to end
+description connects he to DX
+description connects fs to he
+description connects start to DX
+description connects pj to DX
+description connects end to zg
+description connects zg to sl
+description connects zg to pj
+description connects pj to he
+description connects RW to he
+description connects fs to DX
+description connects pj to RW
+description connects zg to RW
+description connects start to pj
+description connects he to WI
+description connects zg to he
+description connects pj to fs
+description connects start to RW
+Node fs  has links: 1 2 3 5 
+Node end  has links: 0 6 
+Node he  has links: 3 0 5 8 9 6 
+Node DX  has links: 2 4 5 0 
+Node start  has links: 3 5 8 
+Node pj  has links: 3 6 2 8 4 0 
+Node zg  has links: 1 7 5 8 2 
+Node sl  has links: 6 
+Node RW  has links: 2 5 6 4 
+Node WI  has links: 2 
+End node is 1
+Start node is 4
+Path: start DX he DX pj DX fs 
+Path: start DX he DX pj zg 
+Path: start DX he DX pj RW zg 
+Path: start DX he DX pj fs 
+Path: start DX he DX fs 
+Path: start DX he DX fs DX pj zg 
+Path: start DX he DX fs DX pj RW zg 
+Path: start DX he DX fs pj zg 
+Path: start DX he DX fs pj RW zg 
+Path: start DX he fs 
+Path: start DX he fs DX pj zg 
+Path: start DX he fs DX pj RW zg 
+Path: start DX he fs pj zg 
+Path: start DX he fs pj RW zg 
+Path: start DX he pj DX fs 
+Path: start DX he pj zg 
+Path: start DX he pj RW zg 
+Path: start DX he pj fs 
+Path: start DX he RW pj DX fs 
+Path: start DX he RW pj zg 
+Path: start DX he RW pj RW zg 
+Path: start DX he RW pj fs 
+Path: start DX he RW zg 
+Path: start DX he RW zg pj DX fs 
+Path: start DX he RW zg pj fs 
+Path: start DX he RW zg RW pj DX fs 
+Path: start DX he RW zg RW pj fs 
+Path: start DX he zg 
+Path: start DX he zg pj DX fs 
+Path: start DX he zg pj fs 
+Path: start DX he zg RW pj DX fs 
+Path: start DX he zg RW pj fs 
+Path: start DX pj DX he DX fs 
+Path: start DX pj DX he fs 
+Path: start DX pj DX he RW zg 
+Path: start DX pj DX he zg 
+Path: start DX pj DX fs 
+Path: start DX pj DX fs he RW zg 
+Path: start DX pj DX fs he zg 
+Path: start DX pj DX fs DX he RW zg 
+Path: start DX pj DX fs DX he zg 
+Path: start DX pj zg 
+Path: start DX pj zg RW he DX fs 
+Path: start DX pj zg RW he fs 
+Path: start DX pj zg he DX fs 
+Path: start DX pj zg he fs 
+Path: start DX pj he DX fs 
+Path: start DX pj he fs 
+Path: start DX pj he RW zg 
+Path: start DX pj he zg 
+Path: start DX pj RW he DX fs 
+Path: start DX pj RW he fs 
+Path: start DX pj RW he RW zg 
+Path: start DX pj RW he zg 
+Path: start DX pj RW zg 
+Path: start DX pj RW zg RW he DX fs 
+Path: start DX pj RW zg RW he fs 
+Path: start DX pj RW zg he DX fs 
+Path: start DX pj RW zg he fs 
+Path: start DX pj fs 
+Path: start DX pj fs he RW zg 
+Path: start DX pj fs he zg 
+Path: start DX pj fs DX he RW zg 
+Path: start DX pj fs DX he zg 
+Path: start DX fs 
+Path: start DX fs he DX pj zg 
+Path: start DX fs he DX pj RW zg 
+Path: start DX fs he pj zg 
+Path: start DX fs he pj RW zg 
+Path: start DX fs he RW pj zg 
+Path: start DX fs he RW pj RW zg 
+Path: start DX fs he RW zg 
+Path: start DX fs he zg 
+Path: start DX fs DX he DX pj zg 
+Path: start DX fs DX he DX pj RW zg 
+Path: start DX fs DX he pj zg 
+Path: start DX fs DX he pj RW zg 
+Path: start DX fs DX he RW pj zg 
+Path: start DX fs DX he RW pj RW zg 
+Path: start DX fs DX he RW zg 
+Path: start DX fs DX he zg 
+Path: start DX fs DX pj DX he RW zg 
+Path: start DX fs DX pj DX he zg 
+Path: start DX fs DX pj zg 
+Path: start DX fs DX pj he RW zg 
+Path: start DX fs DX pj he zg 
+Path: start DX fs DX pj RW he RW zg 
+Path: start DX fs DX pj RW he zg 
+Path: start DX fs DX pj RW zg 
+Path: start DX fs pj DX he RW zg 
+Path: start DX fs pj DX he zg 
+Path: start DX fs pj zg 
+Path: start DX fs pj he RW zg 
+Path: start DX fs pj he zg 
+Path: start DX fs pj RW he RW zg 
+Path: start DX fs pj RW he zg 
+Path: start DX fs pj RW zg 
+Path: start pj DX he DX fs 
+Path: start pj DX he fs 
+Path: start pj DX he RW zg 
+Path: start pj DX he zg 
+Path: start pj DX fs 
+Path: start pj DX fs he RW zg 
+Path: start pj DX fs he zg 
+Path: start pj DX fs DX he RW zg 
+Path: start pj DX fs DX he zg 
+Path: start pj zg 
+Path: start pj zg RW he DX fs 
+Path: start pj zg RW he fs 
+Path: start pj zg he DX fs 
+Path: start pj zg he fs 
+Path: start pj he DX fs 
+Path: start pj he fs 
+Path: start pj he RW zg 
+Path: start pj he zg 
+Path: start pj RW he DX fs 
+Path: start pj RW he fs 
+Path: start pj RW he RW zg 
+Path: start pj RW he zg 
+Path: start pj RW zg 
+Path: start pj RW zg RW he DX fs 
+Path: start pj RW zg RW he fs 
+Path: start pj RW zg he DX fs 
+Path: start pj RW zg he fs 
+Path: start pj fs 
+Path: start pj fs he RW zg 
+Path: start pj fs he zg 
+Path: start pj fs DX he RW zg 
+Path: start pj fs DX he zg 
+Path: start RW he DX pj DX fs 
+Path: start RW he DX pj zg 
+Path: start RW he DX pj RW zg 
+Path: start RW he DX pj fs 
+Path: start RW he DX fs 
+Path: start RW he DX fs DX pj zg 
+Path: start RW he DX fs DX pj RW zg 
+Path: start RW he DX fs pj zg 
+Path: start RW he DX fs pj RW zg 
+Path: start RW he fs 
+Path: start RW he fs DX pj zg 
+Path: start RW he fs DX pj RW zg 
+Path: start RW he fs pj zg 
+Path: start RW he fs pj RW zg 
+Path: start RW he pj DX fs 
+Path: start RW he pj zg 
+Path: start RW he pj RW zg 
+Path: start RW he pj fs 
+Path: start RW he RW pj DX fs 
+Path: start RW he RW pj zg 
+Path: start RW he RW pj RW zg 
+Path: start RW he RW pj fs 
+Path: start RW he RW zg 
+Path: start RW he RW zg pj DX fs 
+Path: start RW he RW zg pj fs 
+Path: start RW he RW zg RW pj DX fs 
+Path: start RW he RW zg RW pj fs 
+Path: start RW he zg 
+Path: start RW he zg pj DX fs 
+Path: start RW he zg pj fs 
+Path: start RW he zg RW pj DX fs 
+Path: start RW he zg RW pj fs 
+Path: start RW pj DX he DX fs 
+Path: start RW pj DX he fs 
+Path: start RW pj DX he RW zg 
+Path: start RW pj DX he zg 
+Path: start RW pj DX fs 
+Path: start RW pj DX fs he RW zg 
+Path: start RW pj DX fs he zg 
+Path: start RW pj DX fs DX he RW zg 
+Path: start RW pj DX fs DX he zg 
+Path: start RW pj zg 
+Path: start RW pj zg RW he DX fs 
+Path: start RW pj zg RW he fs 
+Path: start RW pj zg he DX fs 
+Path: start RW pj zg he fs 
+Path: start RW pj he DX fs 
+Path: start RW pj he fs 
+Path: start RW pj he RW zg 
+Path: start RW pj he zg 
+Path: start RW pj RW he DX fs 
+Path: start RW pj RW he fs 
+Path: start RW pj RW he RW zg 
+Path: start RW pj RW he zg 
+Path: start RW pj RW zg 
+Path: start RW pj RW zg RW he DX fs 
+Path: start RW pj RW zg RW he fs 
+Path: start RW pj RW zg he DX fs 
+Path: start RW pj RW zg he fs 
+Path: start RW pj fs 
+Path: start RW pj fs he RW zg 
+Path: start RW pj fs he zg 
+Path: start RW pj fs DX he RW zg 
+Path: start RW pj fs DX he zg 
+Path: start RW zg 
+Path: start RW zg pj DX he DX fs 
+Path: start RW zg pj DX he fs 
+Path: start RW zg pj DX fs 
+Path: start RW zg pj he DX fs 
+Path: start RW zg pj he fs 
+Path: start RW zg pj RW he DX fs 
+Path: start RW zg pj RW he fs 
+Path: start RW zg pj fs 
+Path: start RW zg RW he DX pj DX fs 
+Path: start RW zg RW he DX pj fs 
+Path: start RW zg RW he DX fs 
+Path: start RW zg RW he fs 
+Path: start RW zg RW he pj DX fs 
+Path: start RW zg RW he pj fs 
+Path: start RW zg RW he RW pj DX fs 
+Path: start RW zg RW he RW pj fs 
+Path: start RW zg RW pj DX he DX fs 
+Path: start RW zg RW pj DX he fs 
+Path: start RW zg RW pj DX fs 
+Path: start RW zg RW pj he DX fs 
+Path: start RW zg RW pj he fs 
+Path: start RW zg RW pj RW he DX fs 
+Path: start RW zg RW pj RW he fs 
+Path: start RW zg RW pj fs 
+Path: start RW zg he DX pj DX fs 
+Path: start RW zg he DX pj fs 
+Path: start RW zg he DX fs 
+Path: start RW zg he fs 
+Path: start RW zg he pj DX fs 
+Path: start RW zg he pj fs 
+Path: start RW zg he RW pj DX fs 
+Path: start RW zg he RW pj fs 
+226

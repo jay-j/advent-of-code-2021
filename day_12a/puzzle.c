@@ -26,7 +26,6 @@ typedef struct Path{
 } Path;
 
 
-
 void print_connections(node* n){
    printf("Node %s  has links: ", n->name);
    for (size_t i=0; i<n->n_links; ++i){
@@ -37,19 +36,20 @@ void print_connections(node* n){
       
 
 void print_path(node* network, Path* path){
-   //printf("Path: ");
+   printf("Path: ");
    for(size_t i=0; i<path->length; ++i){
-      printf("%s,", network[path->node_id[i]].name);
+      printf("%s ", network[path->node_id[i]].name);
    }
-   printf("end\n");
+   printf("\n");
 }
 
-
 void cleanup(node* network){
+   // free arrays stored inside the network
+   // TODO ... if I decide to malloc these ?
+
    // free the network itself
    free(network);
 }
-
 
 int find_node_by_name(node* network, char* name){
    int result = -1;
@@ -77,7 +77,6 @@ int name_to_type(char* name){
    return result;
 }
 
-
 // determine if node CHECK is on PATH
 int node_already_used(node* network, Path* path, node* check){
    int result = 0;
@@ -88,7 +87,7 @@ int node_already_used(node* network, Path* path, node* check){
 }
 
 
-void advance_paths(node* network, node* start, node* end, node* current, Path* path, int* count, int has_visited_small){
+void advance_paths(node* network, node* end, node* current, Path* path, int* count){
    // for each node connected to this node
    for(size_t i=0; i<current->n_links; ++i){
       node* candidate = network+current->links[i];
@@ -100,8 +99,9 @@ void advance_paths(node* network, node* start, node* end, node* current, Path* p
          continue;
       }
 
-      // if candidate, is big, then simple advancement of exploration
-      if (candidate->type == NODE_TYPE_BIG){
+      // if node is not on path already OR is a big node
+      if (( node_already_used(network, path, candidate) == 0) | (candidate->type == NODE_TYPE_BIG)){
+
          // create a new path
          Path path_new;
          path_new.length = path->length+1;
@@ -111,46 +111,20 @@ void advance_paths(node* network, node* start, node* end, node* current, Path* p
          path_new.node_id[path_new.length-1] = (candidate - network);
 
          // spawn a path from that node onwards
-         advance_paths(network, start, end, candidate, &path_new, count, has_visited_small);
+         advance_paths(network, end, candidate, &path_new, count);
+
       }
-      else{ // this is a small node
-         // for each option; re-use a small node (k=1), or not (k=0) 
-         for(size_t k=0; k<2; ++k){
 
-            // k=0 is normal mode, no re-use
-            // k=1 is re-use attempt
-
-            // if node is not on path already 
-            int node_used = node_already_used(network, path, candidate);
-            if ( ((node_used == 0) & (k==0)) | ((node_used == 1) & (k==1) & (has_visited_small == 0) & (candidate != start)) ){
-
-               // create a new path
-               Path path_new;
-               path_new.length = path->length+1;
-               for(size_t j=0; j<path->length; ++j){
-                  path_new.node_id[j] = path->node_id[j];
-               }
-               path_new.node_id[path_new.length-1] = (candidate - network);
-
-               // spawn a path from that node onwards
-               if (k == 1){
-                  advance_paths(network, start, end, candidate, &path_new, count, 1);
-               }
-               else{
-                   advance_paths(network, start, end, candidate, &path_new, count, has_visited_small);
-               }
-            }
-         }
-      }
    }
+
 }
 
 int main(int argc, char *argv[]){
    node* network;
    network = (node*) malloc(NODE_MAX * sizeof(node));
    node_qty = 0;
-   node* start = network;
-   node* end = network;
+   node* start;
+   node* end;
 
    // read in the file
    char filename[64];
@@ -229,8 +203,8 @@ int main(int argc, char *argv[]){
    Path path;
    path.length = 1;
    path.node_id[0] = (start - network);
-   int has_visited_small = 0;
-   advance_paths(network, start, end, start, &path, &count, has_visited_small);
+   advance_paths(network, end, start, &path, &count);
+    
    
    printf("%d\n", count);
 
